@@ -117,10 +117,9 @@ function progress-bar-cc() {
         printf "%.1f" $allover > ~/.allover #pseudo-task ~ version control
         read allover < ~/.allover #pseudo-task ~ version control
         cp ~/custombash/README.MD ~/custombash/README.backup
-        sed '$d' ~/custombash/README.backup > ~/custombash/README.backup.backup
-        sed '$d' ~/custombash/README.backup.backup > ~/custombash/README.md
+        sed '$d' ~/custombash/README.backup > ~/custombash/README.md
         echo "####### version = $allover" >> ~/README.md
-        echo " " >> ~/README.md
+        echo "~" >> ~/README.md
         git add README.md > ~/junk
         git commit -m "README" > ~/junk
         rm -rf ~/junk

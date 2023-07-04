@@ -1,0 +1,556 @@
+#!/usr/bin/env bash
+
+#colors
+export red="\033[1;31m"
+export green="\033[1;32m"
+export yellow="\033[1;33m"
+export blue="\033[1;34m"
+export purple="\033[1;35m"
+export cyan="\033[1;36m"
+export grey="\033[0;37m"
+export reset="\033[m"
+export orange="\033[0;33m"
+
+#clear custom cls
+function cls() {
+    clear
+}
+
+#update/upgrade progress-bar
+function progress-bar-up() {
+    i=0
+    echo "${yellow}Update Sequence Activated ...$reset"
+    echo "${green}[$reset ${blue}status$reset                                                  ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.4
+    cls
+    ((i=i+3))
+    echo "${yellow}Update Sequence Activated ...$reset"
+    echo "${green}[$reset ${blue}status$reset #                                                ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.8
+    cls
+    ((i=i+5))
+    echo "${yellow}Checking ...$reset"
+    echo "${green}[$reset ${blue}status$reset ####                                             ${green}]$reset ${cyan}$i%$reset"
+    echo "junk log entry `date`" >> ~/.jLog
+    echo "~" >> ~/.jLog
+    sleep 0.6
+    cls
+    ((i=i+25))
+    echo "${yellow}Updating ...$reset"
+    echo "${green}[$reset ${blue}status$reset ##############                                   ${green}]$reset ${cyan}$i%$reset"
+    sudo apt-get update -y >> ~/.jLog
+    echo "~" >> ~/.jLog
+    cls
+    ((i=i+32))
+    echo "${yellow}Updating ...$reset"
+    echo "${green}[$reset ${blue}status$reset ###################################              ${green}]$reset ${cyan}$i%$reset"
+    sudo apt-get upgrade -y >> ~/.jLog
+    echo "~" >> ~/.jLog
+    cls
+    ((i=i+23))
+    echo "${yellow}Validating ...$reset"
+    echo "${green}[$reset ${blue}status$reset ############################################     ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.5
+    cls
+    ((i=i+12))
+    echo "${yellow}Validating ...$reset"
+    echo "${green}[$reset ${blue}status$reset ################################################ ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.9
+    cls
+    echo "${green}done.$reset"
+    sleep 3s
+    cls
+}
+
+#conda-install progress bar
+function progress-bar-conda-install() {
+    i=0
+    echo "${yellow}Preparing to install MiniConda ...$reset"
+    echo "${green}[$reset ${blue}status$reset                                                  ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.4
+    cls
+    ((i=i+2))
+    echo "${yellow}Preparing to install MiniConda ...$reset"
+    echo "${green}[$reset ${blue}status$reset #                                                ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.8
+    cls
+    ((i=i+6))
+    echo "${yellow}Preparing to install MiniConda ...$reset"
+    echo "${green}[$reset ${blue}status$reset ####                                             ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.6
+    cls
+    ((i=i+20))
+    echo "${yellow}Downloading data ...$reset"
+    echo "${green}[$reset ${blue}status$reset ##############                                   ${green}]$reset ${cyan}$i%$reset"
+    cd ~ #task 1
+    gh repo clone d33pster/pr1vat3 -- -q #task 2
+    cls
+    ((i=i+42))
+    echo "${yellow}Downloading data ...$reset"
+    echo "${green}[$reset ${blue}status$reset ###################################              ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.7
+    cls
+    ((i=i+18))
+    echo "${yellow}Validating ...$reset"
+    echo "${green}[$reset ${blue}status$reset ############################################     ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.5
+    cls
+    ((i=i+12))
+    echo "${yellow}Validating ...$reset"
+    echo "${green}[$reset ${blue}status$reset ################################################ ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.9
+    cls
+    echo "${green}done.$reset"
+    sleep 3s
+    cls
+    bash ~/pr1vat3/conda.sh #task 3
+}
+
+#cc progress bar
+function progress-bar-cc() {
+    i=0
+    echo "${yellow}Checking ...$reset"
+    echo "${green}[$reset ${blue}status$reset                                                  ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.4
+    cls
+    ((i=i+2))
+    echo "${yellow}Checking...$reset"
+    echo "${green}[$reset ${blue}status$reset #                                                ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.8
+    cls
+    ((i=i+6))
+    echo "${yellow}Checking ...$reset"
+    echo "${green}[$reset ${blue}status$reset ####                                             ${green}]$reset ${cyan}$i%$reset"
+    sleep 0.6
+    cls
+    ((i=i+20))
+    echo "${yellow}Syncing Remote Data ...$reset"
+    echo "${green}[$reset ${blue}status$reset ##############                                   ${green}]$reset ${cyan}$i%$reset"
+    cd ~ #task 0
+    gh repo clone d33pster/custombash -- -q #task 1
+    cls
+    ((i=i+35))
+    echo "${yellow}Syncing Remote Data ...$reset"
+    echo "${green}[$reset ${blue}status$reset ###################################              ${green}]$reset ${cyan}$i%$reset"
+    cd ~/custombash #task2
+    sleep 0.7
+    cls
+    ((i=i+18))
+    echo "${yellow}Validating ...$reset"
+    echo "${green}[$reset ${blue}status$reset ############################################     ${green}]$reset ${cyan}$i%$reset"
+    sleep 1
+    if diff -q ~/.custom-linux-bash ~/custombash/.custom-linux-bash &>/dev/null; #task 3
+    then
+        cls
+        i=100
+        echo "${green}Configuration unchanged.$reset"
+        cd ~
+        echo "${green}[$reset ${blue}status$reset ################################################ ${green}]$reset ${cyan}$i%$reset"
+        sleep 2.5
+        cls
+    else
+        cls
+        ((i=i+14))
+        echo "${yellow}Saving new Configuration ...$reset"
+        cp ~/.custom-linux-bash ~/custombash/.custom-linux-bash #task 4
+        echo "${green}[$reset ${blue}status$reset ############################################     ${green}]$reset ${cyan}$i%$reset"
+        sleep 2
+        cls
+        echo "${green}Saved. $reset"
+        echo "${green}[$reset ${blue}status$reset ############################################     ${green}]$reset ${cyan}$i%$reset"
+        sleep 3
+        cls
+        ((i=i+2))
+        echo "${yellow}Alterting Remote Repo ...$reset"
+        echo "${green}[$reset ${blue}status$reset ##############################################   ${green}]$reset ${cyan}$i%$reset"
+        sleep 0.8
+        read version < ~/custombash/.version-lin #pseudo-task ~ version control
+        ((version=version+0.1)) #pseudo-task ~ version control
+        printf "%.1f" $version > ~/custombash/.version-lin #pseudo-task ~ version control
+        read version < ~/custombash/.version-lin #pseudo-task ~ version control
+        echo " "
+        echo " "
+        gap "update(linux) v$version" #task 6
+        cd .. #task 7
+        ((i=i+3))
+        echo "${green}Custom Commands updated.$reset"
+        echo "${green}[$reset ${blue}status$reset ################################################ ${green}]$reset ${cyan}$i%$reset"
+        sleep 1.5
+        cls
+    fi
+    echo "${green}done.$reset"
+    sleep 1
+}
+
+#self interest
+function help() {
+    cls
+    echo "${yellow}?-- help --?$reset"
+    echo " "
+    echo "${cyan}setup$reset ~ add source files to .zshrc"
+    echo "${cyan}up$reset ~ update/upgrade linux"
+    echo "${cyan}}cls$reset ~ clear"
+    echo "${cyan}get$reset ~ package installer ~ ${orange}args: <package-name>$reset"
+    echo "${cyan}cc$reset ~ edit custom commands ~ ${orange}args: <editor>$reset"
+    echo "${cyan}cc-up$reset ~ update remote repository"
+    echo "${cyan}log$reset ~ show custom commands junk output log ~ ${red}press q to exit$reset"
+    echo "${cyan}reps$reset ~ list repos"
+    echo "${cyan}gst$reset ~ git status"
+    echo "${cyan}gl $reset~ git log"
+    echo "${cyan}gap$reset ~ git add commit push ~ ${orange}args: <commit-msg>$reset (default - adding files)"
+    echo "${cyan}gcl$reset ~ git clone ~ ${orange}args: <username> <repo-name> <optional-clone-destination>$reset"
+    echo "${cyan}ghcli-in$reset ~ install GitHub CLI"
+    echo "${cyan}ghcli-up$reset ~ update/upgrade GitHub CLI"
+    echo "${cyan}ghcli-init$reset ~ git login"
+    echo "${cyan}ghcli-end$reset ~ git logout"
+    echo "${cyan}ghcli$reset ~ git auth status"
+    echo "${cyan}gconfig-ue$reset ~ git global username and email ~ ${orange}args: <username> <user-email>$reset"
+    echo "${cyan}gconfig$reset ~ view or edit .gitconfig ~ ${orange}args: <editor>$reset"
+    echo "${cyan}f$reset ~ view current dir or speecified directory ~ ${orange}args: <optional-dir-path>$reset"
+    echo "${cyan}conda-install$reset ~ install conda ~ ${red}requires ghcli login(${reset}${cyan}d33pster${reset}${red})$reset"
+    echo "${cyan}gp-main$reset ~ push to main"
+    echo "${cyan}gadd$reset ~ add all files to git index"
+    echo "${cyan}gcom$reset ~ git commit ~ ${orange}args: <optional-commit-msg>"
+    echo " "
+}
+
+#log function
+function log() {
+    cls
+    cat ~/.jLog
+    echo -n ": "
+    read q
+    cls
+}
+
+#git short commit
+function gap() {
+    echo "${yellow}adding all files ...$reset"
+    git add *
+    git add .*
+    
+    echo "junk log entry `date`" >> ~/.jLog
+    echo "~" >> ~/.jLog
+    
+    if [ -z "$1" ];
+    then
+    echo " "
+    echo "${yellow}commiting Changes ...$reset"
+    echo " "
+    git commit -m "adding files" >> ~/.jlog
+    else
+    echo " "
+    echo "${yellow}commiting Changes with msg $1 $reset"
+    echo " "
+    git commit -m "$1" >> ~/.jLog
+    fi
+
+    echo " "
+    echo "${yellow}Pushing ...$reset"
+    echo " "
+    git push origin main >> ~/.jLog
+    echo "~" >> ~/.jLog
+    echo " "
+    echo "${green}done$reset"
+    sleep 1.5
+    cls
+}
+
+#self change
+function cc() {
+    if [ -z "$1" ];
+    then sudo gedit ~/.custom-linux-bash
+    else
+    sudo $1 ~/.custom-linux-bash
+    fi
+
+    cls
+
+    progress-bar-cc
+
+    sudo rm -rf ~/custombash
+    sleep 2
+    cls
+}
+
+#git status short
+function gst() {
+    cls
+    echo "${yellow}Current Repo Stat: $reset"
+    echo " "
+    git status
+    echo " "
+}
+
+#git log shortcut
+function gl() {
+    cls
+    git log
+    cls
+}
+
+
+#automate gitclone ~ remove "./" necessity
+function gcl() {
+    cls
+    
+    if [ -z "$1" ];
+    then
+    echo "${red}-- Args not Provided --$reset"
+    sleep 1
+    echo " "
+    echo "${yellow}resetting ...$reset"
+    sleep 2
+    cls
+    return 0
+    fi
+
+    if [ -z "$3" ];
+    then ~/gc-lin $1 $2
+    else ~/gc-lin $1 $2 $3
+    fi
+
+    echo " "
+    echo "${yellow}changing directory ... $reset"
+    sleep 2
+    cls
+
+    if [ -z "$3" ];
+    then 
+        cd $2
+        echo "${orange}$2/ -->$reset"
+    else 
+        cd "$3/$2"
+        echo "${orange}$3/$2/ -->$reset"
+    fi
+
+    ls
+}
+
+
+#github cli install
+function ghcli-in() {
+    cls
+    echo "${yellow}Installing GitHub-CLI ...$reset"
+    sleep 3
+    echo "\n"
+    type -p curl >/dev/null || (sudo apt update && sudo apt install curl -y)
+    curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg \
+    && sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
+    && sudo apt update \
+    && sudo apt install gh -y
+    cls
+    echo "${green}done.$reset"
+    sleep 5
+    cls
+}
+
+#github cli update
+function ghcli-up() {
+    cls
+    echo "${orange}update sequence activated.$reset"
+    sleep 3
+    cls
+    sudo apt install --upgrade gh
+    cls
+    echo "${green}updated.$reset"
+    sleep 3
+    cls
+    gh --version
+}
+
+#cli login
+function ghcli-init() {
+    cls
+    gh auth login
+    cls
+    echo "${green}init complete.$reset"
+    sleep 3
+    cls
+}
+
+#cli logout
+function ghcli-end() {
+    cls
+    gh auth logout
+    cls
+    echo "${green}session ended.$reset"
+    sleep 3
+    cls
+}
+
+#cli auth status
+function ghcli() {
+    cls
+    echo "${yellow} Current Configuration: $reset"
+    echo " "
+    gh auth status
+    sleep 5
+    cls
+}
+
+#git config add username useremail
+function gconfig-ue() {
+    cls
+
+    if [ -z "$1" ];
+    then
+        echo "${red}parameter missing.$reset"
+        sleep 3
+        cls
+        return 0
+    fi
+
+    echo "${yellow}Configuring ...$reset"
+    git config --global user.name "$1"
+    git config --global user.email "$2"
+    sleep 1
+    cls
+    echo "${green}done.$reset"
+    sleep 3
+    cls
+}
+
+#view (default) or edit(param) .gitconfig
+function gconfig() {
+    cls
+
+    if [ -z "$1" ];
+    then
+        echo "${yellow}?-- Git CONFIG --?$reset"
+        echo " "
+        git config --list
+        return 0
+    else
+        $1 ~/.gitconfig
+        cls
+        return 0
+    fi
+}
+
+#list current dir or given
+function f() {
+    cls
+    
+    if [ -z "$1" ];
+    then
+        current_directory=```exec pwd```
+        echo "${orange}$current_directory/ -->$reset"
+        ls
+        return 0
+    else
+        echo "${orange}$1/ -->$reset"
+        ls $1
+        return 0
+    fi
+}
+
+#conda install ~ requires github cli and login ~ d33pster
+function conda-install() {
+    cls
+
+    progress-bar-conda-install
+    
+    cls
+    echo "${green}conda installed.$reset"
+    sleep 2
+    cls
+    echo "${yellow}Checking for updates ..."
+    sleep 1
+    conda update -n base -c defaults conda -y
+    sleep 1
+    cls
+    echo "${green}done.$reset"
+    cd ~
+    rm -rf pr1vat3
+    sleep 5
+    cls
+}
+
+#git add short
+function gadd() {
+    cls
+    echo "${yellow}Adding all files to the git index ...$reset"
+    echo "junk log entry `date`" >> ~/.jLog
+    echo "~" >> ~/.jLog
+    git add * >> ~/.jLog 
+    git add .* >> ~/.jLog
+    echo "~" >> ~/.jLog
+    sleep 1
+    cls
+    echo "${green}done.$reset"
+    sleep 2
+    cls
+}
+
+#git push short
+function gp-main() {
+    cls
+    echo "${yellow}Pushing to main branch ...$reset"
+    echo " "
+    git push origin main
+    echo " "
+    sleep 1
+    echo " "
+    cls
+    echo "${green}done.$reset"
+    sleep 5
+    cls
+}
+
+#repo list
+function reps() {
+    cls
+    echo "${orange}Repos Found: $reset"
+    gh repo list
+}
+
+#linux-update
+function up() {
+    sudo clear #for better performance
+    progress-bar-up
+}
+
+#cc-up
+function cc-up() {
+    cls
+    progress-bar-cc
+    rm -rf ~/custombash
+}
+
+#function to download and install a package
+function get() {
+    sudo clear #performance issue fix
+    echo "${yellow}Checking and Downloading ..."
+    sleep 1.5
+    echo "junk log entry `date`" >> ~/.jLog
+    echo "~" >> ~/.jLog
+    sudo apt-get install $1 -y >> ~/.jLog
+    echo "~" >> ~/.jLog
+    cls
+    echo "${green}done.$reset"
+    sleep 2
+    cls
+    $1 --version
+}
+
+#function for git commit
+function gcom() {
+    cls
+    if [ -z "$1" ]; then
+    	git commit
+    	cls
+    	echo "${green}done.$reset"
+    	sleep 2
+    	cls
+    else
+    	echo "${yellow}commiting with msg $1 ...$reset"
+    	sleep 1
+    	git commit -m $1
+    	cls
+    	echo "${green}done.$reset"
+    	sleep 2
+    	cls
+    fi
+}

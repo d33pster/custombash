@@ -22,7 +22,8 @@ function help() {
     cls
     echo "${yellow}?-- help --?$reset"
     echo " "
-    echo "${cyan}}cls$reset ~ clear"
+    echo "${cyan}cls$reset ~ clear"
+    echo "${cyan}cache-del$reset ~ clear caches"
     echo "${cyan}cc$reset ~ edit custom commands ~ ${orange}args: <editor>$reset"
     echo "${cyan}cc-up$reset ~ update remote repository"
     echo "${cyan}brew-init$rest ~ install brew"
@@ -528,5 +529,12 @@ function getc() {
     echo " "
     echo "${green}done.$reset"
     sleep 2
+    cls
+}
+
+#clear caches ...
+function cache-del() {
+    clear
+    sudo rm -rf /Library/Caches
     cls
 }

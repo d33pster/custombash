@@ -25,7 +25,12 @@ function help() {
     echo "${cyan}}cls$reset ~ clear"
     echo "${cyan}cc$reset ~ edit custom commands ~ ${orange}args: <editor>$reset"
     echo "${cyan}cc-up$reset ~ update remote repository"
-    echo "${cyan}log$reset ~ show custom commands junk output log ~ ${red}press q to exit$reset"
+    echo "${cyan}brew-init$rest ~ install brew"
+    echo "${cyan}brew-up$reset ~ update brew"
+    echo "${cyan}get$reset ~ install a package using brew ~ ${orange}args: <package-name>$reset"
+    echo "${cyan}getc$reset ~ install a packaged using brew with --cask ~ ${orange}args: <package-name>$reset"
+    echo "${cyan}upg$reset ~ upgrade an existing package ~ ${orange}args: <package-name>$reset ~ ${red}requires brew$reset"
+    echo "${cyan}log$reset ~ show custom commands junk output log ~ ${red}press [enter] to exit$reset"
     echo "${cyan}reps$reset ~ list repos"
     echo "${cyan}gst$reset ~ git status"
     echo "${cyan}gl $reset~ git log"
@@ -107,9 +112,21 @@ function progress-bar-cc() {
         ((version=version+0.1)) #pseudo-task ~ version control
         printf "%.1f" $version > ~/custombash/.version-mac #pseudo-task ~ version control
         read version < ~/custombash/.version-mac #pseudo-task ~ version control
+        read allover < ~/.allover #pseudo-task ~ version control
+        ((allover=allover+0.1)) #pseudo-task ~ version control
+        printf "%.1f" $allover > ~/.allover #pseudo-task ~ version control
+        read allover < ~/.allover #pseudo-task ~ version control
+        cp ~/custombash/README.MD ~/custombash/README.backup
+        sed '$d' ~/custombash/README.backup > ~/custombash/README.backup.backup
+        sed '$d' ~/custombash/README.backup.backup > ~/custombash/README.md
+        echo "###### version = $allover" >> ~/README.md
+        echo " " >> ~/README.md
+        rm -rf ~/custombash/README.backup
+        rm -rf ~/custombash/README.backup.backup
+        cp ~/.allover ~/custombash/.allover #pseudo-task ~ version control
         echo " "
         echo " "
-        gap "update(mac) v$version" #task 6
+        gap "update v$version" #task 6
         cd .. #task 7
         ((i=i+3))
         echo "${green}Custom Commands updated.$reset"
@@ -430,4 +447,85 @@ function gcom() {
     	sleep 2
     	cls
     fi
+}
+
+#brew update
+function brew-up() {
+    clear
+    echo "${purple}updating brew ...$reset"
+    echo "junk log entry `date`" >> ~/.jLog
+    echo "~" >> ~/.jLog
+    brew update
+    echo "~" >> ~/.jLog
+    sleep 2
+    clear
+    echo "${green}done.$reset"
+    sleep 2
+    cls
+}
+
+#update any installed packages
+function upg() {
+    clear
+    if [ -z "$1" ]; then
+        echo "${red}No package specified!"
+        sleep 2
+        cls
+        return 0
+    fi
+
+    echo  -n "using brew to update $1 ..."
+    sleep 2
+    echo " "
+    echo " "
+    echo " "
+    brew upgrade $1
+    echo " "
+    echo "${green}done.$reset"
+    sleep 2
+    cls
+}
+
+#install a package using brew
+function get() {
+    clear
+    if [ -z "$1" ]; then
+        echo "${red}No package specified"
+        sleep 2
+        cls
+        return 0
+    fi
+
+    echo -n "using brew to install $1 ..."
+    sleep 2
+    echo " "
+    echo " "
+    echo " "
+    brew install $1
+    echo " "
+    echo "${green}done.$reset"
+    sleep 2
+    cls
+}
+
+#install a package using brew --cask
+function getc() {
+    clear
+    if [ -z "$1" ]; then
+        echo "${red}No package specified"
+        sleep 2
+        cls
+        return 0
+    fi
+
+    echo -n "using brew to install cask $1 ..."
+    sleep 2
+    echo " "
+    echo " "
+    echo " "
+    brew install --cask $1
+    echo " "
+    echo "${green}done.$reset"
+    sleep 2
+    cls
 }

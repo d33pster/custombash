@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#macOS
 #colors
 export red="\033[1;31m"
 export green="\033[1;32m"

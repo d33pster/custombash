@@ -1,0 +1,37 @@
+#!/usr/bin/env python3
+
+import os
+from time import sleep
+directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+os.system("sudo clear")
+print("Checking ...")
+sleep(1)
+os.system("pip install simple-colors")
+os.system("sudo apt-get install gedit -y")
+os.system("clear")
+from simple_colors import *
+
+directory_main = os.path.join(directory, 'main')
+directory_clb = os.path.join(directory, '.custom-linux-bash')
+directory_gclin = os.path.join(directory_main, 'gc-lin')
+
+print(yellow("Setup Sequence Activated ...", 'blink'))
+# os.system("echo 'source ~/.custom-linux-bash' >> ~/.zshrc")
+# os.system("echo 'junk log init `date`' > ~/.jLog")
+# os.system("echo '~' >> ~/.jLog")
+# os.system(f"sudo cp {directory_clb} ~/.custom-linux-bash")
+# os.system(f"sudo cp {directory_gclin} ~/gc-lin")
+with open(os.path.join(directory_main, 'setup-helper'), "w") as setup_helper:
+    setup_helper.write("#!/usr/bin/env bash\n\n")
+    setup_helper.write("echo '\nsource ~/.custom-linux-bash' >> ~/.zshrc\n")
+    setup_helper.write("echo 'junk log init `date`' > ~/.jLog\n")
+    setup_helper.write("echo '~' >> ~/.jLog\n")
+    setup_helper.write(f"sudo cp {directory_clb} ~/.custom-linux-bash\n")
+    setup_helper.write(f"sudo cp {directory_gclin} ~/gc-lin\n")
+os.system(f"sudo chmod +x {os.path.join(directory_main, 'setup-helper')}")
+os.system(f"{os.path.join(directory_main, 'setup-helper')}")
+os.system(f"rm -rf {os.path.join(directory_main, 'setup-helper')}")
+sleep(2)
+os.system("clear")
+print(green("Setup Complete.", 'blink'))

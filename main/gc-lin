@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+version = 1.0
+# This is for LINUX/macOs - GITHUB CLI
+
+from time import sleep
+import platform
+
+#excluding Windows
+if platform.system()=='Windows':
+	print("Windows not Supported Yet :(")
+	sleep(5)
+	exit()
+
+import sys
+import os
+
+try:
+	sys.argv[1]
+except IndexError:
+	os.system("clear")
+	print("?-- Parameters Not Given --?")
+	sleep(2)
+	os.system("clear")
+	exit()
+else:
+	pass
+
+#defining help -h
+if sys.argv[1]=='-h' or sys.argv[1]=='--help':
+	print("~~HELP~~")
+	print("\nSyntax: ./gc-lin [OPTION] [username] [repo name] [destination address (optional)]")
+	print("Options: (optional)")
+	print("-h/--help     help")
+	print("-v/--version  version")
+	exit()
+
+#defining version -v
+if sys.argv[1]=='-v' or sys.argv[1]=='--version':
+	print(f"gc-lin v{version} ...")
+	print("author: d33pster")
+	print("email: deep.main.ac@gmail.com")
+	print("language: Python")
+	exit()
+
+length_args = len(sys.argv)
+username = sys.argv[1]
+reponame = sys.argv[2]
+
+if length_args>3:
+	address = sys.argv[3]
+	os.chdir(address)
+
+os.system(f"gh repo clone {username}/{reponame}")

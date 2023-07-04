@@ -16,4 +16,5 @@ Contains Custom Bash Commands for debian linux and macOS
 5. open a new terminal and type ```help``` and hit enter for command guide
 
 ####### version = 3.4
+####### version = 3.5
 ~

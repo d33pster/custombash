@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #macOS
 #colors
-export red="\033[1;31m"
+export red="\033[0;31m" #normal red
 export green="\033[1;32m"
 export yellow="\033[1;33m"
 export blue="\033[1;34m"
@@ -11,8 +11,10 @@ export grey="\033[0;37m"
 export reset="\033[m"
 export orange="\033[0;33m"
 export lpurple="\033[1;35m"
-export lred="\033[1;31m"
+export lred="\033[1;31m" #bold red
 export lblue="\033[1;34m"
+export lcyan="\033[1;36m"
+export dgray="\033[1;30m"
 
 #clear custom cls
 function cls() {
@@ -54,7 +56,7 @@ function license() {
 function help() {
     clear
     read version < ~/.allover
-    echo "${lpurple}CUSTOM BASHER ${lblue}v$version$reset"
+    echo "${lpurple}CUSTOM BASHER ${lred}v$version$reset"
     echo "${green}author: d33pster :: email: deep.main.ac@gmail.com$reset"
     echo " "
     echo "${lred}?-- help --?$reset"
@@ -87,7 +89,7 @@ function help() {
     echo "${cyan}26. gadd$reset ~ add all files to git index"
     echo "${cyan}27. gcom$reset ~ git commit ~ ${purple}args: <optional-commit-msg>"
     echo " "
-    echo "${red}~~ ADVANCED ~~$reset"
+    echo "${lred}~~ ADVANCED ~~$reset"
     echo " "
     echo "${purple}trigger$reset ~ ${blue}args: <app-name> (from /Applications - case insensitive), <optional-alias>,"
     echo "          <optional-new-name>, sys(optional)$reset"

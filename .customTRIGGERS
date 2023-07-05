@@ -1,3 +1,18 @@
 #!/usr/bin/env bash
 
+#function names
+triggers=()
 
+#show created triggers
+function trigger-show() {
+    clear
+    echo "\033[1;31mSo far following triggers are defined in your local machine: \033[m"
+    echo ""
+
+    i=1
+    for trig in ${triggers[@]}; do
+        echo "[trigger $i] $trig"
+        ((i=i+1))
+    done
+    echo ""
+}

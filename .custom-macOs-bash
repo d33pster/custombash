@@ -64,7 +64,7 @@ function help() {
     echo "${cyan}cache-del$reset ~ clear caches"
     echo "${cyan}cc$reset ~ edit custom commands ~ ${purple}args: <editor>$reset"
     echo "${cyan}cc-up$reset ~ update remote repository"
-    echo "${cyan}brew-init$rest ~ install brew"
+    echo "${cyan}brew-init$reset ~ install brew"
     echo "${cyan}brew-up$reset ~ update brew"
     echo "${cyan}get$reset ~ install a package using brew ~ ${purple}args: <package-name>$reset"
     echo "${cyan}getc$reset ~ install a packaged using brew with --cask ~ ${purple}args: <package-name>$reset"

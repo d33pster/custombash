@@ -2,6 +2,7 @@
 
 import os
 from time import sleep
+from datetime import datetime
 directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 os.system("sudo clear")
@@ -17,6 +18,10 @@ directory_gclin = os.path.join(directory_main, 'gc-lin')
 directory_trig = os.path.join(directory, '.customTRIGGERS')
 directory_alloverVersion = os.path.join(directory, '.allover')
 
+#time
+now = datetime.now()
+now = now.strftime("%B %d %H:%M:%S %Y")
+
 print(magenta("Setup Sequence Activated ...", 'blink'))
 # os.system("echo 'source ~/.custom-linux-bash' >> ~/.zshrc")
 # os.system("echo 'junk log init `date`' > ~/.jLog")
@@ -27,7 +32,7 @@ with open(os.path.join(directory_main, 'setup-helper'), "w") as setup_helper:
     setup_helper.write("#!/usr/bin/env bash\n\n")
     setup_helper.write("echo '\nsource ~/.custom-macOs-bash' >> ~/.zshrc\n")
     setup_helper.write("echo '\nsource ~/.customTRIGGERS' >> ~/.zshrc\n")
-    setup_helper.write("echo 'junk log init `date`' > ~/.jLog\n")
+    setup_helper.write(f"echo 'junk log init {now}' > ~/.jLog\n")
     setup_helper.write("echo '~' >> ~/.jLog\n")
     setup_helper.write(f"sudo cp {directory_cmb} ~/.custom-linux-bash\n")
     setup_helper.write(f"sudo cp {directory_gclin} ~/gc-lin\n")

@@ -166,8 +166,8 @@ function progress-bar-cc() {
         cp ~/custombash/README.MD ~/custombash/README.backup # attach allover version to the bottom of readme
         sed '$d' ~/custombash/README.backup > ~/custombash/README.md # attach allover version to the bottom of readme
         echo "v$allover" >> ~/custombash/README.md # attach allover version to the bottom of readme
-        git add README.md > ~/junk
-        git commit -m "README" > ~/junk
+        git add README.md &> ~/junk
+        git commit -m "README" &> ~/junk
         rm -rf ~/custombash/README.backup
         rm -rf ~/custombash/README.backup.backup
         echo " "
@@ -175,8 +175,8 @@ function progress-bar-cc() {
         gap "update v$version" #task 6
         cp ~/.allover ~/custombash/.allover #pseudo-task ~ version control
         git add .allover
-        git commit -m "update v$allover" > ~/junk
-        git push origin main >> ~/junk
+        git commit -m "update v$allover" &> ~/junk
+        git push origin main &> ~/junk
         rm -rf ~/junk
         cd .. #task 7
         ((i=i+3))

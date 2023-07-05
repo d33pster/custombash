@@ -170,8 +170,6 @@ function progress-bar-cc() {
         git commit -m "README" &> ~/junk
         rm -rf ~/custombash/README.backup
         rm -rf ~/custombash/README.backup.backup
-        echo " "
-        echo " "
         gap "update v$version" &> ~/junk #task 6
         cp ~/.allover ~/custombash/.allover #pseudo-task ~ version control
         git add .allover

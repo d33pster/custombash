@@ -10,6 +10,9 @@ export cyan="\033[1;36m"
 export grey="\033[0;37m"
 export reset="\033[m"
 export orange="\033[0;33m"
+export lpurple="\033[1;35m"
+export lred="\033[1;31m"
+export lblue="\033[1;34m"
 
 #clear custom cls
 function cls() {
@@ -17,43 +20,80 @@ function cls() {
     echo "login: `date` on console."
 }
 
+#LICENSE
+function license() {
+    clear
+    read version < ~/.allover
+    echo "${lpurple}CUSTOM BASHER ${lblue}v$version$reset"
+    echo "${green}author: d33pster :: email: deep.main.ac@gmail.com$reset"
+    echo " "
+    echo "${red}Copyright (c) 2023 Soumyo Deep Gupta (d33pster)"
+    echo " "
+    echo "Permission is hereby granted, free of charge, to any person obtaining a copy"
+    echo "of this software and associated documentation files (the "Software"), to deal"
+    echo "in the Software without restriction, including without limitation the rights"
+    echo "to use, copy, modify, merge, publish, distribute, sublicense, and/or sell"
+    echo "copies of the Software, and to permit persons to whom the Software is"
+    echo "furnished to do so, subject to the following conditions:"
+    echo " "
+    echo "The above copyright notice and this permission notice shall be included in all"
+    echo "copies or substantial portions of the Software."
+    echo " "
+    echo "THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR"
+    echo "IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,"
+    echo "FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE"
+    echo "AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER"
+    echo "LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,"
+    echo "OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE"
+    echo -n "SOFTWARE.$reset"
+    read choke
+    cls
+}
+
 #self interest
 function help() {
-    cls
-    echo "${yellow}?-- help --?$reset"
+    clear
+    read version < ~/.allover
+    echo "${lpurple}CUSTOM BASHER ${lblue}v$version$reset"
+    echo "${green}author: d33pster :: email: deep.main.ac@gmail.com$reset"
+    echo " "
+    echo "${lred}?-- help --?$reset"
     echo " "
     echo "${cyan}cls$reset ~ clear"
+    echo "${cyan}license$reset ~ show license for CUSTOM BASHER"
     echo "${cyan}cache-del$reset ~ clear caches"
-    echo "${cyan}cc$reset ~ edit custom commands ~ ${orange}args: <editor>$reset"
+    echo "${cyan}cc$reset ~ edit custom commands ~ ${purple}args: <editor>$reset"
     echo "${cyan}cc-up$reset ~ update remote repository"
     echo "${cyan}brew-init$rest ~ install brew"
     echo "${cyan}brew-up$reset ~ update brew"
-    echo "${cyan}get$reset ~ install a package using brew ~ ${orange}args: <package-name>$reset"
-    echo "${cyan}getc$reset ~ install a packaged using brew with --cask ~ ${orange}args: <package-name>$reset"
-    echo "${cyan}upg$reset ~ upgrade an existing package ~ ${orange}args: <package-name>$reset ~ ${red}requires brew$reset"
+    echo "${cyan}get$reset ~ install a package using brew ~ ${purple}args: <package-name>$reset"
+    echo "${cyan}getc$reset ~ install a packaged using brew with --cask ~ ${purple}args: <package-name>$reset"
+    echo "${cyan}upg$reset ~ upgrade an existing package ~ ${purple}args: <package-name>$reset ~ ${red}requires brew$reset"
     echo "${cyan}log$reset ~ show custom commands junk output log ~ ${red}press [enter] to exit$reset"
     echo "${cyan}reps$reset ~ list repos"
     echo "${cyan}gst$reset ~ git status"
     echo "${cyan}gl $reset~ git log"
-    echo "${cyan}gap$reset ~ git add commit push ~ ${orange}args: <commit-msg>$reset (default - adding files)"
-    echo "${cyan}gcl$reset ~ git clone ~ ${orange}args: <username> <repo-name> <optional-clone-destination>$reset"
+    echo "${cyan}gap$reset ~ git add commit push ~ ${purple}args: <commit-msg>$reset (default - adding files)"
+    echo "${cyan}gcl$reset ~ git clone ~ ${purple}args: <username> <repo-name> <optional-clone-destination>$reset"
     echo "${cyan}ghcli-in$reset ~ install GitHub CLI"
     echo "${cyan}ghcli-up$reset ~ update/upgrade GitHub CLI"
     echo "${cyan}ghcli-init$reset ~ git login"
     echo "${cyan}ghcli-end$reset ~ git logout"
     echo "${cyan}ghcli$reset ~ git auth status"
-    echo "${cyan}gconfig-ue$reset ~ git global username and email ~ ${orange}args: <username> <user-email>$reset"
-    echo "${cyan}gconfig$reset ~ view or edit .gitconfig ~ ${orange}args: <editor>$reset"
-    echo "${cyan}f$reset ~ view current dir or speecified directory ~ ${orange}args: <optional-dir-path>$reset"
+    echo "${cyan}gconfig-ue$reset ~ git global username and email ~ ${purple}args: <username> <user-email>$reset"
+    echo "${cyan}gconfig$reset ~ view or edit .gitconfig ~ ${purple}args: <editor>$reset"
+    echo "${cyan}f$reset ~ view current dir or speecified directory ~ ${purple}args: <optional-dir-path>$reset"
     echo "${cyan}gp-main$reset ~ push to main"
     echo "${cyan}gadd$reset ~ add all files to git index"
-    echo "${cyan}gcom$reset ~ git commit ~ ${orange}args: <optional-commit-msg>"
+    echo "${cyan}gcom$reset ~ git commit ~ ${purple}args: <optional-commit-msg>"
     echo " "
     echo "${red}~~ ADVANCED ~~$reset"
     echo " "
-    echo "${purple}trigger$reset ~ ${orange}args: <app-name> (from /Applications - case insensitive)"
-    echo "     ~ ${green}usage:$reset 1. use this command to create commandline trigger for macOs Applications"
+    echo "${purple}trigger$reset ~ ${blue}args: <app-name> (from /Applications - case insensitive)$reset"
+    echo "     ${blue}~$reset ${green}usage:$reset 1. use this command to create cli command for macOs Applications"
     echo "              2. after calling this command close the terminal and open a new one"
+    echo "     ${blue}~$reset ${green}example:$reset ~ 1. \$ trigger <app-name> and then close the terminal"
+    echo "                  2. \$ <app-name> in new terminal"
     echo " "
 }
 
@@ -560,7 +600,7 @@ function trigger() {
     echo "#trigger function" >> ~/.customTRIGGERS
     echo "function $1() {" >>~/.customTRIGGERS
     echo "    clear" >> ~/.customTRIGGERS
-    echo "    echo -n '${yellow}opening $1 ...$reset'" >> ~/.customTRIGGERS
+    echo "    echo -n '${purple}opening $1 ...$reset'" >> ~/.customTRIGGERS
     echo "    sleep 2" >> ~/.customTRIGGERS
     echo "    clear" >> ~/.customTRIGGERS
     echo "    open /Applications/$1.app" >> ~/.customTRIGGERS
@@ -573,6 +613,6 @@ function trigger() {
     echo "~" >> ~/.jLog
     echo "trigger init for $1" >> ~/.jLog
     echo "~" >> ~/.jLog
-    echo "${green}trigger created for $1. restart terminal!$reset"
+    echo "${green}trigger created for $1.$reset ${red}restart terminal!$reset"
 }
 

@@ -107,6 +107,8 @@ function help() {
     echo "     ${blue}~$reset ${green}example:$reset ~ 1. \$ trigger <app-name> <optional-alias> <optional-new-name> sys"
     echo "                     and then close the terminal"
     echo "                  2. \$ <app-name> or <alias> in new terminal"
+    echo "${purple}trigger-show$reset"
+    echo "     ${blue}~ ${green}usage:$reset show currently configured triggers."
     echo " "
 }
 
@@ -647,6 +649,17 @@ function trigger() {
     echo "    sleep 1" >> ~/.customTRIGGERS
     echo "    cls" >> ~/.customTRIGGERS
     echo "}" >> ~/.customTRIGGERS   
+
+    if ! [ -z "$2" ]; then
+        if ! [ -z "$3" ]; then
+            echo "triggers+=('$2 --> $3')" >> ~/.customTRIGGERS
+        else
+            echo "triggers+=('$2 --> $1')" >> ~/.customTRIGGERS
+        fi
+    else
+        echo "triggers+=('$1')" >> ~/.customTRIGGERS
+    fi
+
     clear
     echo "junk log entry `date`" >> ~/.jLog
     echo "~" >> ~/.jLog

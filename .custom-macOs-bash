@@ -183,8 +183,7 @@ function progress-bar-cc() {
         echo "v$allover" >> ~/custombash/README.md # attach allover version to the bottom of readme
         git add README.md &> ~/junk
         git commit -m "README" &> ~/junk
-        rm -rf ~/custombash/README.backup
-        rm -rf ~/custombash/README.backup.backup
+        rm -rf ~/custombash/README.backup #rem extra
         gap "update v$version" &> ~/junk #task 6
         cp ~/.allover ~/custombash/.allover #pseudo-task ~ version control
         git add .allover

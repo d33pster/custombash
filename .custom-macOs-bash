@@ -188,7 +188,7 @@ function progress-bar-cc() {
         gap "update v$version" &> ~/junk #task 6
         cp ~/.allover ~/custombash/.allover #pseudo-task ~ version control
         git add .allover
-        git commit -m "update v$allover" &> ~/junk
+        git commit -m "v$allover" &> ~/junk
         git push origin main &> ~/junk
         rm -rf ~/junk
         cd .. #task 7

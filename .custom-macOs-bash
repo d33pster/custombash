@@ -59,41 +59,51 @@ function help() {
     echo " "
     echo "${lred}?-- help --?$reset"
     echo " "
-    echo "${cyan}cls$reset ~ clear"
-    echo "${cyan}license$reset ~ show license for CUSTOM BASHER"
-    echo "${cyan}cache-del$reset ~ clear caches"
-    echo "${cyan}cc$reset ~ edit custom commands ~ ${purple}args: <editor>$reset"
-    echo "${cyan}cc-up$reset ~ update remote repository"
-    echo "${cyan}brew-init$reset ~ install brew"
-    echo "${cyan}brew-up$reset ~ update brew"
-    echo "${cyan}get$reset ~ install a package using brew ~ ${purple}args: <package-name>$reset"
-    echo "${cyan}getc$reset ~ install a packaged using brew with --cask ~ ${purple}args: <package-name>$reset"
-    echo "${cyan}upg$reset ~ upgrade an existing package ~ ${purple}args: <package-name>$reset ~ ${red}requires brew$reset"
-    echo "${cyan}log$reset ~ show custom commands junk output log ~ ${red}press [enter] to exit$reset"
-    echo "${cyan}reps$reset ~ list repos"
-    echo "${cyan}gst$reset ~ git status"
-    echo "${cyan}gl $reset~ git log"
-    echo "${cyan}gap$reset ~ git add commit push ~ ${purple}args: <commit-msg>$reset (default - adding files)"
-    echo "${cyan}gcl$reset ~ git clone ~ ${purple}args: <username> <repo-name> <optional-clone-destination>$reset"
-    echo "${cyan}ghcli-in$reset ~ install GitHub CLI"
-    echo "${cyan}ghcli-up$reset ~ update/upgrade GitHub CLI"
-    echo "${cyan}ghcli-init$reset ~ git login"
-    echo "${cyan}ghcli-end$reset ~ git logout"
-    echo "${cyan}ghcli$reset ~ git auth status"
-    echo "${cyan}gconfig-ue$reset ~ git global username and email ~ ${purple}args: <username> <user-email>$reset"
-    echo "${cyan}gconfig$reset ~ view or edit .gitconfig ~ ${purple}args: <editor>$reset"
-    echo "${cyan}f$reset ~ view current dir or speecified directory ~ ${purple}args: <optional-dir-path>$reset"
-    echo "${cyan}gp-main$reset ~ push to main"
-    echo "${cyan}gadd$reset ~ add all files to git index"
-    echo "${cyan}gcom$reset ~ git commit ~ ${purple}args: <optional-commit-msg>"
+    echo "${cyan}1.  cls$reset ~ clear"
+    echo "${cyan}2.  license$reset ~ show license for CUSTOM BASHER"
+    echo "${cyan}3.  cache-del$reset ~ clear caches"
+    echo "${cyan}4.  cc$reset ~ edit custom commands ~ ${purple}args: <editor>$reset"
+    echo "${cyan}5.  cc-up$reset ~ update remote repository"
+    echo "${cyan}6.  brew-init$reset ~ install brew"
+    echo "${cyan}7.  brew-up$reset ~ update brew"
+    echo "${cyan}8.  get$reset ~ install a package using brew ~ ${purple}args: <package-name>$reset"
+    echo "${cyan}9.  getc$reset ~ install a packaged using brew with --cask ~ ${purple}args: <package-name>$reset"
+    echo "${cyan}10. upg$reset ~ upgrade an existing package ~ ${purple}args: <package-name>$reset ~ ${red}requires brew$reset"
+    echo "${cyan}11. log$reset ~ show custom commands junk output log ~ ${red}press [enter] to exit$reset"
+    echo "${cyan}12. reps$reset ~ list repos"
+    echo "${cyan}13. gst$reset ~ git status"
+    echo "${cyan}14. gl $reset~ git log"
+    echo "${cyan}15. gap$reset ~ git add commit push ~ ${purple}args: <commit-msg>$reset (default - adding files)"
+    echo "${cyan}16. gcl$reset ~ git clone ~ ${purple}args: <username> <repo-name> <optional-clone-destination>$reset"
+    echo "${cyan}17. ghcli-in$reset ~ install GitHub CLI"
+    echo "${cyan}18. ghcli-up$reset ~ update/upgrade GitHub CLI"
+    echo "${cyan}19. ghcli-init$reset ~ git login"
+    echo "${cyan}20. ghcli-end$reset ~ git logout"
+    echo "${cyan}21. ghcli$reset ~ git auth status"
+    echo "${cyan}22. gconfig-ue$reset ~ git global username and email ~ ${purple}args: <username> <user-email>$reset"
+    echo "${cyan}23. gconfig$reset ~ view or edit .gitconfig ~ ${purple}args: <editor>$reset"
+    echo "${cyan}24. f$reset ~ view current dir or speecified directory ~ ${purple}args: <optional-dir-path>$reset"
+    echo "${cyan}25. gp-main$reset ~ push to main"
+    echo "${cyan}26. gadd$reset ~ add all files to git index"
+    echo "${cyan}27. gcom$reset ~ git commit ~ ${purple}args: <optional-commit-msg>"
     echo " "
     echo "${red}~~ ADVANCED ~~$reset"
     echo " "
-    echo "${purple}trigger$reset ~ ${blue}args: <app-name> (from /Applications - case insensitive), <optional-alias>$reset"
+    echo "${purple}trigger$reset ~ ${blue}args: <app-name> (from /Applications - case insensitive), <optional-alias>, <optional-new-name>, sys(optional)$reset"
     echo "     ${blue}~$reset ${green}usage:$reset 1. use this command to create cli command for macOs Applications"
     echo "              2. after calling this command close the terminal and open a new one"
-    echo "     ${blue}~$reset ${green}example:$reset ~ 1. \$ trigger <app-name> <optional-alias> and then close the terminal"
-    echo "                  2. \$ <app-name> in new terminal"
+    echo "              3. the new name arg changes the app name for this script only (just to look good)"
+    echo "              4. also, for using the new name arg, all previous args must be used (this is valid for all "
+    echo "                 commands which accept multiple args) (just use the same args before the new name arg)"
+    echo "                 ~ example: \$ trigger netflix netflix nateflix ~ here the trigger for netflix will be"
+    echo "                 created with alias netflix (which realy doesnt matter ~ alias is the function name "
+    echo "                 which u will be calling using the terminal) and the script will recognise netflix"
+    echo "                 as nateflix (this is just for lookiing good XD)" 
+    echo "              5. the last sys arg is optional and is for system apps like the app store"
+    echo "                 [<app-name>: 'App\ Store']; just add sys"
+    echo "     ${blue}~$reset ${green}example:$reset ~ 1. \$ trigger <app-name> <optional-alias> <optional-new-name> sys"
+    echo "                     and then close the terminal"
+    echo "                  2. \$ <app-name> or <alias> in new terminal"
     echo " "
 }
 
@@ -607,10 +617,29 @@ function trigger() {
     fi
 
     echo "    clear" >> ~/.customTRIGGERS
-    echo "    echo -n '${purple}opening $1 ...$reset'" >> ~/.customTRIGGERS
+
+    if [ -z "$3" ]; then
+        echo "    echo -n '${purple}opening $1 ...$reset'" >> ~/.customTRIGGERS
+    else
+        echo "    echo -n '${purple}opening $3 ...$reset'" >> ~/.customTRIGGERS
+    fi
+
     echo "    sleep 2" >> ~/.customTRIGGERS
     echo "    clear" >> ~/.customTRIGGERS
-    echo "    open /Applications/$1.app" >> ~/.customTRIGGERS
+    
+    checker="sys"
+
+    if ! [ -z "$4" ]; then #if $4 defined
+        if ! [ "$4"=="$checker" ]; then # $4 is mentioned and $4 is not sys
+            echo "${red}parameter not recognised '$4'.$reset"
+            return 0
+        else # $4 is defined and $4 is sys
+            echo "    open /System/Applications/$1.app" >> ~/.customTRIGGERS
+        fi
+    else # $4 parameter is not provided ~ not a system app
+        echo "    open /Applications/$1.app" >> ~/.customTRIGGERS
+    fi
+
     echo "    echo -n '${green}done.$reset'" >> ~/.customTRIGGERS
     echo "    sleep 1" >> ~/.customTRIGGERS
     echo "    cls" >> ~/.customTRIGGERS
@@ -620,6 +649,11 @@ function trigger() {
     echo "~" >> ~/.jLog
     echo "trigger init for $1" >> ~/.jLog
     echo "~" >> ~/.jLog
-    echo "${green}trigger created for $1.$reset ${red}restart terminal!$reset"
+
+    if [ -z "$3" ]; then
+        echo "${green}trigger created for $1.$reset ${red}restart terminal!$reset"
+    else
+        echo "${green}trigger created for $3.$reset ${red}restart terminal!$reset"
+    fi
 }
 

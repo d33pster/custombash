@@ -89,10 +89,10 @@ function help() {
     echo " "
     echo "${red}~~ ADVANCED ~~$reset"
     echo " "
-    echo "${purple}trigger$reset ~ ${blue}args: <app-name> (from /Applications - case insensitive)$reset"
+    echo "${purple}trigger$reset ~ ${blue}args: <app-name> (from /Applications - case insensitive), <optional-alias>$reset"
     echo "     ${blue}~$reset ${green}usage:$reset 1. use this command to create cli command for macOs Applications"
     echo "              2. after calling this command close the terminal and open a new one"
-    echo "     ${blue}~$reset ${green}example:$reset ~ 1. \$ trigger <app-name> and then close the terminal"
+    echo "     ${blue}~$reset ${green}example:$reset ~ 1. \$ trigger <app-name> <optional-alias> and then close the terminal"
     echo "                  2. \$ <app-name> in new terminal"
     echo " "
 }
@@ -599,7 +599,13 @@ function trigger() {
     #edit this file and add a trigger function for the app
     echo " " >> ~/.customTRIGGERS
     echo "#trigger function" >> ~/.customTRIGGERS
-    echo "function $1() {" >>~/.customTRIGGERS
+    
+    if [ -z "$2" ]; then
+        echo "function $1() {" >> ~/.customTRIGGERS
+    else
+        echo "function $2() {" >> ~/.customTRIGGERS
+    fi
+
     echo "    clear" >> ~/.customTRIGGERS
     echo "    echo -n '${purple}opening $1 ...$reset'" >> ~/.customTRIGGERS
     echo "    sleep 2" >> ~/.customTRIGGERS

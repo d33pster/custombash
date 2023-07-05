@@ -172,7 +172,7 @@ function progress-bar-cc() {
         rm -rf ~/custombash/README.backup.backup
         echo " "
         echo " "
-        gap "update v$version" #task 6
+        gap "update v$version" &> ~/junk #task 6
         cp ~/.allover ~/custombash/.allover #pseudo-task ~ version control
         git add .allover
         git commit -m "update v$allover" &> ~/junk
@@ -180,6 +180,7 @@ function progress-bar-cc() {
         rm -rf ~/junk
         cd .. #task 7
         ((i=i+3))
+        clear
         echo "${green}Custom Commands updated.$reset"
         echo "${green}[$reset ${blue}status$reset ################################################ ${green}]$reset ${cyan}$i%$reset"
         sleep 1.5
@@ -217,7 +218,6 @@ function log() {
 
 #git short commit
 function gap() {
-    clear
     echo "${yellow}adding all files ...$reset"
     git add *
     git add .*

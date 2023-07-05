@@ -297,7 +297,7 @@ function gcl() {
         echo "${orange}$3/$2/ -->$reset"
     fi
 
-    ls
+    ls -a
 }
 
 #install brew

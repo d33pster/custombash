@@ -1,6 +1,6 @@
 # Project Custom Bash
 Contains Custom Bash Commands for debian linux and macOS
-
+## it would be better performance wise if terminal size is 105x24 or bigger.
 ### Instructions - Linux
 1. clone the repo ~ ```git clone https://github.com/d33pster/custombash.git```
 2. ```cd custombash``` 

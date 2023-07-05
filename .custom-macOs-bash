@@ -176,7 +176,7 @@ function progress-bar-cc() {
         cp ~/.allover ~/custombash/.allover #pseudo-task ~ version control
         git add .allover
         git commit -m "update v$allover" > ~/junk
-        git push origin main > ~/junk
+        git push origin main >> ~/junk
         rm -rf ~/junk
         cd .. #task 7
         ((i=i+3))

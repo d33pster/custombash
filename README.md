@@ -16,4 +16,4 @@ Contains Custom Bash Commands for debian linux and macOS
 5. open a new terminal and type ```help``` and hit enter for command guide
 ###### 6. for trigger command --> if ```<app-name>``` has space between the name suppose: "Google Chrome" then for the ```<app-name>``` arg, use "Google\ Chrome".
 
-v5.5
+v5.1

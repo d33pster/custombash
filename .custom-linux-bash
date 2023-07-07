@@ -296,11 +296,12 @@ function cc() {
 
 #git status short
 function gst() {
-    cls
+    clear
     echo "${yellow}Current Repo Stat: $reset"
     echo " "
     git status
     echo " "
+    echo "login: `date` on console"
 }
 
 #git log shortcut
@@ -438,7 +439,7 @@ function gconfig-ue() {
 
 #view (default) or edit(param) .gitconfig
 function gconfig() {
-    cls
+    clear
 
     if [ -z "$1" ];
     then
@@ -451,6 +452,8 @@ function gconfig() {
         cls
         return 0
     fi
+    echo ""
+    echo "login: `date` on console"
 }
 
 #list current dir or given

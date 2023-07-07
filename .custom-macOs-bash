@@ -64,30 +64,28 @@ function help() {
     echo "${cyan}1.  cls$reset ~ clear"
     echo "${cyan}2.  license$reset ~ show license for CUSTOM BASHER"
     echo "${cyan}3.  cache-del$reset ~ clear caches"
-    echo "${cyan}4.  cc$reset ~ edit custom commands ~ ${purple}args: <editor>$reset ~ ${red}only for dev$reset"
-    echo "${cyan}5.  cc-up$reset ~ update remote repository ~ ${red}only for dev$reset"
-    echo "${cyan}6.  brew-init$reset ~ install brew"
-    echo "${cyan}7.  brew-up$reset ~ update brew"
-    echo "${cyan}8.  get$reset ~ install a package using brew ~ ${purple}args: <package-name>$reset"
-    echo "${cyan}9.  getc$reset ~ install a packaged using brew with --cask ~ ${purple}args: <package-name>$reset"
-    echo "${cyan}10. upg$reset ~ upgrade an existing package ~ ${purple}args: <package-name>$reset ~ ${red}requires brew$reset"
-    echo "${cyan}11. log$reset ~ show custom commands junk output log ~ ${red}press [enter] to exit$reset"
-    echo "${cyan}12. reps$reset ~ list repos"
-    echo "${cyan}13. gst$reset ~ git status"
-    echo "${cyan}14. gl $reset~ git log"
-    echo "${cyan}15. gap$reset ~ git add commit push ~ ${purple}args: <commit-msg>$reset (default - adding files)"
-    echo "${cyan}16. gcl$reset ~ git clone ~ ${purple}args: <username> <repo-name> <optional-clone-destination>$reset"
-    echo "${cyan}17. ghcli-in$reset ~ install GitHub CLI"
-    echo "${cyan}18. ghcli-up$reset ~ update/upgrade GitHub CLI"
-    echo "${cyan}19. ghcli-init$reset ~ git login"
-    echo "${cyan}20. ghcli-end$reset ~ git logout"
-    echo "${cyan}21. ghcli$reset ~ git auth status"
-    echo "${cyan}22. gconfig-ue$reset ~ git global username and email ~ ${purple}args: <username> <user-email>$reset"
-    echo "${cyan}23. gconfig$reset ~ view or edit .gitconfig ~ ${purple}args: <editor>$reset"
-    echo "${cyan}24. f$reset ~ view current dir or speecified directory ~ ${purple}args: <optional-dir-path>$reset"
-    echo "${cyan}25. gp-main$reset ~ push to main"
-    echo "${cyan}26. gadd$reset ~ add all files to git index"
-    echo "${cyan}27. gcom$reset ~ git commit ~ ${purple}args: <optional-commit-msg>"
+    echo "${cyan}4.  brew-init$reset ~ install brew"
+    echo "${cyan}5.  brew-up$reset ~ update brew"
+    echo "${cyan}6.  get$reset ~ install a package using brew ~ ${purple}args: <package-name>$reset"
+    echo "${cyan}7.  getc$reset ~ install a packaged using brew with --cask ~ ${purple}args: <package-name>$reset"
+    echo "${cyan}8. upg$reset ~ upgrade an existing package ~ ${purple}args: <package-name>$reset ~ ${red}requires brew$reset"
+    echo "${cyan}9. log$reset ~ show custom commands junk output log ~ ${red}press [enter] to exit$reset"
+    echo "${cyan}10. reps$reset ~ list repos"
+    echo "${cyan}11. gst$reset ~ git status"
+    echo "${cyan}12. gl $reset~ git log"
+    echo "${cyan}13. gap$reset ~ git add commit push ~ ${purple}args: <commit-msg>$reset (default - adding files)"
+    echo "${cyan}14. gcl$reset ~ git clone ~ ${purple}args: <username> <repo-name> <optional-clone-destination>$reset"
+    echo "${cyan}15. ghcli-in$reset ~ install GitHub CLI"
+    echo "${cyan}16. ghcli-up$reset ~ update/upgrade GitHub CLI"
+    echo "${cyan}17. ghcli-init$reset ~ git login"
+    echo "${cyan}18. ghcli-end$reset ~ git logout"
+    echo "${cyan}19. ghcli$reset ~ git auth status"
+    echo "${cyan}20. gconfig-ue$reset ~ git global username and email ~ ${purple}args: <username> <user-email>$reset"
+    echo "${cyan}21. gconfig$reset ~ view or edit .gitconfig ~ ${purple}args: <editor>$reset"
+    echo "${cyan}22. f$reset ~ view current dir or speecified directory ~ ${purple}args: <optional-dir-path>$reset"
+    echo "${cyan}23. gp-main$reset ~ push to main"
+    echo "${cyan}24. gadd$reset ~ add all files to git index"
+    echo "${cyan}25. gcom$reset ~ git commit ~ ${purple}args: <optional-commit-msg>"
     echo " "
     echo "${lred}~~ ADVANCED ~~$reset"
     echo " "
@@ -184,6 +182,7 @@ function progress-bar-cc() {
         git add README.md &> ~/junk
         git commit -m "README" &> ~/junk
         rm -rf ~/custombash/README.backup #rem extra
+        rm -rf ~/custombash/.allover
         gap "update v$version" &> ~/junk #task 6
         cp ~/.allover ~/custombash/.allover #pseudo-task ~ version control
         git add .allover
@@ -672,3 +671,20 @@ function trigger() {
     fi
 }
 
+#function cc-edit for just editing
+function cc-edit() {
+    clear
+    if [ -z "$1" ]; then
+        code ~/.custom-macOs-bash
+    else
+    	$1 ~/.custom-macOs-bash
+    fi
+    
+    clear
+    echo "${green}custom commands updated in local machine. ${red}Remote repo not updated.$reset"
+    echo ""
+    echo "${green} \$ ${blue}cc-up ${yellow} to update repo.$reset"
+    echo -n "${cyan}<-- Restart terminal to refresh -->$reset"
+    read choke
+    exit 0
+}

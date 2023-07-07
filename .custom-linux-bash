@@ -86,7 +86,7 @@ function progress-bar-conda-install() {
     echo "${yellow}Downloading data ...$reset"
     echo "${green}[$reset ${blue}status$reset ##############                                   ${green}]$reset ${cyan}$i%$reset"
     cd ~ #task 1
-    gh repo clone d33pster/pr1vat3 -- -q #task 2
+    gh repo clone d33pster/assets -- -q #task 2
     clear
     ((i=i+42))
     echo "${yellow}Downloading data ...$reset"
@@ -106,7 +106,7 @@ function progress-bar-conda-install() {
     echo "${green}done.$reset"
     sleep 3s
     clear
-    bash ~/pr1vat3/conda.sh #task 3
+    bash ~/assets/conda.sh #task 3
 }
 
 #git short add commit push
@@ -461,6 +461,8 @@ function f() {
     cls
     echo ""
     
+    curr=$(pwd)
+    
     if [ -z "$1" ];
     then
         current_directory=```exec pwd```
@@ -474,6 +476,7 @@ function f() {
     fi
     
     echo ""
+    cd $curr
 }
 
 #conda install ~ requires github cli and login ~ d33pster

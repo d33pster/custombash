@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+#version fix
 #colors
 export red=""
 export green=""
@@ -553,7 +554,7 @@ function up() {
 
 #cc-up
 function cc-up() {
-    clear
+    sudo clear
     progress-bar-cc
     rm -rf ~/custombash
     cls

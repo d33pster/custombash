@@ -87,7 +87,16 @@ function progress-bar-conda-install() {
     echo "${yellow}Downloading data ...$reset"
     echo "${green}[$reset ${blue}status$reset ##############                                   ${green}]$reset ${cyan}$i%$reset"
     cd ~ #task 1
-    gh repo clone d33pster/assets -- -q #task 2
+    echo "junk log entry: `date`" >> ~/.jLog
+    echo "~" >> ~/.jLog
+    sudo apt-get install wget &>> ~/.jLog  #task2
+    echo ""
+    echo "using wget ..."
+    echo ""
+    wget  https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-x86_64.sh #task3
+    echo ""
+    echo "done."
+    sleep 2
     clear
     ((i=i+42))
     echo "${yellow}Downloading data ...$reset"
@@ -107,7 +116,16 @@ function progress-bar-conda-install() {
     echo "${green}done.$reset"
     sleep 3s
     clear
-    bash ~/assets/conda.sh #task 3
+    sh ./Miniconda3-py39_4.12.0-Linux-x86_64.sh #task 4
+    echo ""
+    echo "done."
+    rm -rf ./Miniconda3-py39_4.12.0-Linux-x86_64.sh
+    echo "~" >> ~/.jLog
+    echo ""
+    echo "need to restart now."
+    echo ":: press [enter/return] to continue ::"
+    read choke
+    exit
 }
 
 #git short add commit push
@@ -262,6 +280,7 @@ function help() {
     echo "${green}gconfig$reset ~ view or edit .gitconfig ~ ${orange}args: <editor>$reset"
     echo "${green}f$reset ~ view current dir or speecified directory ~ ${orange}args: <optional-dir-path>$reset"
     echo "${green}conda-install$reset ~ install conda ~ ${red}requires ghcli login(${reset}${cyan}d33pster${reset}${red})$reset"
+    echo "conda-up ~ conda update"
     echo "${green}gp-main$reset ~ push to main"
     echo "${green}gadd$reset ~ add all files to git index"
     echo "${green}gcom$reset ~ git commit ~ ${orange}args: <optional-commit-msg>"
@@ -485,27 +504,6 @@ function conda-install() {
     clear
 
     progress-bar-conda-install
-    
-    clear
-    echo "${green}conda installed.$reset"
-    sleep 2
-    clear
-    echo "${yellow}Checking for updates ..."
-    sleep 1
-    conda_base=$(conda info --base)
-    conda_source="$conda_base/etc/profile.d/conda.sh"
-    source $conda_base
-    echo "junk log entry `date`" >> ~/.jLog
-    echo "~" >> ~/.jLog
-    conda update -n base -c defaults conda -y &>> ~/.jLog
-    echo "~" >> ~/.jLog
-    sleep 1
-    clear
-    echo "${green}done.$reset"
-    cd ~
-    rm -rf pr1vat3
-    sleep 5
-    cls
 }
 
 #git add short
@@ -612,4 +610,13 @@ function cc-edit() {
     echo -n "${cyan}<-- Restart terminal to refresh -->$reset"
     read choke
     exit
+}
+
+function conda-up() {
+    clear
+    echo "junk log entry: `date`" >> ~/.jLog
+    echo "~" >> ~/.jLog
+    conda update -n base -c defaults conda -y &>> ~/.jLog
+    echo "~" >> ~/.jLog
+    cls
 }

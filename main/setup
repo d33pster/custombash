@@ -54,7 +54,7 @@ with open(os.path.join(directory_main, 'setup-helper'), "w") as setup_helper:
     setup_helper.write("echo -e '\033[1;32msetup-helper protocol executed successfully.\033[m'\n")
     setup_helper.write("sleep 1\n")
     setup_helper.write("echo ''\n")
-    setup_helper.write("echo '-e \033[1;34mfinalizing setup ...\033'\n")
+    setup_helper.write("echo -e ' \033[1;34mfinalizing setup ...\033'\n")
 os.system(f"sudo chmod +x {os.path.join(directory_main, 'setup-helper')}")
 os.system(f"{os.path.join(directory_main, 'setup-helper')}")
 os.system(f"rm -rf {os.path.join(directory_main, 'setup-helper')}")

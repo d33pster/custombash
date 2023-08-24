@@ -8,7 +8,6 @@ directory = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 os.system("sudo clear")
 print("Checking ...")
 sleep(1)
-os.system("pip install simple-colors")
 os.system("sudo apt-get install gedit -y")
 os.system("clear")
 from simple_colors import *

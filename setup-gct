@@ -3,7 +3,9 @@
 import os
 import sys
 
-os.system("sudo chmod +x ./main/setup-gct")
+currentDirectory = os.path.dirname(os.path.abspath(__file__))
+target = os.path.join(currentDirectory, "main", "setup-gct")
+os.system(f"sudo chmod +x {target}")
 
 check = True
 
@@ -13,6 +15,6 @@ except IndexError:
     check = False
 
 if(check):
-    os.system(f"./main/setup-gct {sys.argv[1]}")
+    os.system(f"{target} {sys.argv[1]}")
 else:
-    os.system("./main/setup-gct")
+    os.system(f"{target}")

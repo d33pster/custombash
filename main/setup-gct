@@ -49,6 +49,6 @@ def main():
     run(f"sudo chown {user} ~/.allover")
     print(Fore.RED, "INFO", Fore.RESET, " : Updated permissions")
     
-    print(Fore.GREEN, "INFO", Fore.RESET, " : Installed (Terminal Restart Required)")
+    print(Fore.GREEN, "INFO", Fore.RESET, " : Installed", Fore.RED, "(Terminal Restart Required)", Fore.RESET)
 
 if __name__=="__main__":main()

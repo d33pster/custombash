@@ -288,7 +288,7 @@ function log() {
 #self change
 function cc() {
     if [ -z "$1" ];
-    then sudo gedit ~/.custom-linux-bash
+    then sudo nano ~/.custom-linux-bash
     else
     sudo $1 ~/.custom-linux-bash
     fi
@@ -607,7 +607,7 @@ function gcom() {
 function cc-edit() {
     clear
     if [ -z "$1" ]; then
-        sudo gedit ~/.custom-linux-bash
+        sudo nano ~/.custom-linux-bash
     else
     	sudo $1 ~/.custom-linux-bash
     fi

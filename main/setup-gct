@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+
+from os import system as run, popen as getOutputOf
+from os.path import dirname, abspath, join as joinPath
+from sys import argv as args
+from datetime import datetime
+from colorama import init as colorama_init, Fore
+
+def main():
+    checkarg = True
+    try:
+        args[1]
+    except IndexError:
+        checkarg = False
+    
+    colorama_init()
+    directory = dirname(dirname(abspath(__file__)))
+    
+    print(Fore.RED, "INFO", Fore.RESET, " : Checking and Installing dependencies for Custombasher")
+    # run("sudo apt-get install gedit -y 2> /dev/null") ## no gedit in codespace
+    print(Fore.RED, "INFO", Fore.RESET, " : Dependencies Installed")
+
+    dir_main = joinPath(directory, "main")
+    file_clb = joinPath(directory, ".custom-linux-bash")
+    file_gclin = joinPath(dir_main, "gc-lin")
+    file_all_version = joinPath(directory, ".allover")
+    print(Fore.RED, "INFO", Fore.RESET, " : Resolved Directories")
+
+    if(checkarg):
+        print(Fore.RED, "INFO", Fore.RESET, " : Custom shell param added.")
+        print(Fore.RED, "INFO", Fore.RESET, f" : shell -> {args[1]}")
+        run(f"echo \"source ~/.custom-linux-bash\" >> ~/.{args[1]}rc")
+    else:
+        print(Fore.RED, "INFO", Fore.RESET, " : No Custom shell param provided")
+        print(Fore.RED, "INFO", Fore.RESET, " : Defaulting to bash")
+        run("echo \"source ~/.custom-linux-bash\" >> ~/.bashrc")
+    
+    print(Fore.RED, "INFO", Fore.RESET, " : Shell config written successfully")
+
+    user = getOutputOf("whoami").read().replace('\n','')
+    print(Fore.RED, "INFO", Fore.RESET, f" : Retrieved user -> {user}")
+
+    run(f"sudo cp {file_clb} ~/.custom-linux-bash")
+    print(Fore.RED, "INFO", Fore.RESET, " : Installed custom bash commands")
+    run(f"sudo cp {file_gclin} ~/gc-lin")
+    print(Fore.RED, "INFO", Fore.RESET, " : Installed github tools")
+    run(f"sudo cp {file_all_version} ~/.allover")
+    print(Fore.RED, "INFO", Fore.RESET, " : Updated version info")
+    run(f"sudo chown {user} ~/.allover")
+    print(Fore.RED, "INFO", Fore.RESET, " : Updated permissions")
+    
+    print(Fore.GREEN, "INFO", Fore.RESET, " : Installed")
+    print(Fore.YELLOW, " RESTART TERMINAL", Fore.RESET)
+
+if __name__=="__main__":main()

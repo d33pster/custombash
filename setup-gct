@@ -1,5 +1,18 @@
 #!/usr/bin/env python3
 
 import os
+import sys
+
 os.system("sudo chmod +x ./main/setup-gct")
-os.system("./main/setup-gct")
+
+check = True
+
+try:
+    sys.argv[1]
+except IndexError:
+    check = False
+
+if(check):
+    os.system(f"./main/setup-gct {sys.argv[1]}")
+else:
+    os.system("./main/setup-gct")
